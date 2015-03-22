@@ -27,7 +27,48 @@
 ##  Parameters:
 ##      x --> a matrix to be used by this generator function.
 ##      Returns a list of matrix handling functions
+##--------------------------------------------------------------------------
 ##
+## Test run
+##
+## Create a 2x2 matrix
+## > x <- matrix(c(1,3,4,2),nrow=2,ncol=2)
+## > x
+## [,1] [,2]
+## [1,]    1    4
+## [2,]    3    2
+##
+## Create the special matrix and retrive its value
+## > m <- makeCacheMatrix(x)
+## > m$get()
+## [,1] [,2]
+## [1,]    1    4
+## [2,]    3    2
+##
+## Caculate the inverse of the matrix
+## > cacheSolve(m)
+## [,1] [,2]
+## [1,] -0.2  0.4
+## [2,]  0.3 -0.1
+##
+## Calcultate the inverse again.  This time is should get the cached result
+## value.
+## > cacheSolve(m)
+## Getting Cached Matrix Inverse
+## [,1] [,2]
+## [1,] -0.2  0.4
+## [2,]  0.3 -0.1
+##
+## Test for correctnes.  The matrix multiple of the matrix and its inverse
+## should return the identity matrix.
+## > m$get() %*% cacheSolve(m)
+## Getting Cached Matrix Inverse
+## [,1] [,2]
+## [1,]    1    0
+## [2,]    0    1
+## > 
+##
+##--------------------------------------------------------------------------
 
 makeCacheMatrix <- function(x = matrix()) {
     
